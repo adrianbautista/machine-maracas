@@ -23,18 +23,19 @@ window.addEventListener('load', function() {
       port = inputs['port'].value,
       path = inputs['path'].value;
 
+    var port = new osc.WebSocketPort({
+      url: ("ws://" + address + ":" + port)
+    });
 
-    var ws = new WebSocket("wss://" + address + ":" + port);
+    port.on("message", function(oscMessage) {
+      console.log(oscMessage);
+    });
 
-    ws.onopen = function() {};
+    port.on("close", function() {
+      alert("You've been disconnected");
+    });
 
-    ws.onmessage = function(event){
-      console.log(event.data);
-    };
-
-    ws.onclose = function(){};
-
-    ws.onerror = function(){};
+    port.open();
 
     setInterval(function() {
       var oscMsg = [xAxis, yAxis, zAxis];
@@ -44,7 +45,7 @@ window.addEventListener('load', function() {
       yAxisLabel.textContent = yAxis.toFixed(2);
       zAxisLabel.textContent = zAxis.toFixed(2);
 
-      ws.send({ address: path, args: oscMsg });
+      port.send({ address: path, args: oscMsg });
 
     }, 1000);
 

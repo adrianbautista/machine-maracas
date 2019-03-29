@@ -56,16 +56,15 @@ var wss = new WebSocket.Server({
 wss.on("connection", function(ws) {
   logger.info("A Web Socket connection has been established!");
   console.log("A Web Socket connection has been established!");
-  
-  ws.on('message', function incoming(data) {
-    wss.clients.forEach(function each(client) {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(data);
-      }
-    });
+
+  var socketPort = new osc.WebSocketPort({
+    socket: ws
   });
 
-  ws.on('close', () => console.log('Client disconnected'));
+  var relay = new osc.Relay(udp, socketPort, {
+    raw: true
+  });
+
 });
 
 // based off of standard express generator web server setup
