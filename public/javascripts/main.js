@@ -47,7 +47,7 @@ window.addEventListener('load', function() {
 
       port.send({ address: path, args: oscMsg });
 
-    }, 1000);
+    }, 10);
 
 
     for (var i=0; i < inputs.length; i++) {
