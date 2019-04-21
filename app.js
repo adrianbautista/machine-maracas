@@ -11,10 +11,12 @@ const WEB_SOCKET_PORT = 8081;
 var osc = require("osc"),
     WebSocket = require("ws");
 
-var udp = new osc.UDPPort({
+var udp = new osc.UDPPort(
+  {
     remoteAddress: "127.0.0.1",
     remotePort: UDP_PORT
-});
+  }
+);
 
 // inspired by osc.js UDP-browser example
 // https://github.com/colinbdclark/osc.js-examples/tree/master/udp-browser
@@ -61,10 +63,20 @@ wss.on("connection", function(ws) {
     socket: ws
   });
 
+  ws.on('message', (wsMsg) => {
+    try {
+      console.log(wsMsg.toString());
+    } catch(e) {
+      console.log("Unexpected message: ");
+      console.log(e)
+      console.log(e.stack)
+    }
+  });
+
+
   var relay = new osc.Relay(udp, socketPort, {
     raw: true
   });
-
 });
 
 // based off of standard express generator web server setup
