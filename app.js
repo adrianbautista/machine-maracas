@@ -66,6 +66,7 @@ wss.on("connection", function(ws) {
   ws.on('message', (wsMsg) => {
     try {
       console.log(wsMsg.toString());
+      udp.sendRaw(wsMsg);          
     } catch(e) {
       console.log("Unexpected message: ");
       console.log(e)
@@ -74,9 +75,9 @@ wss.on("connection", function(ws) {
   });
 
 
-  var relay = new osc.Relay(udp, socketPort, {
-    raw: true
-  });
+  // var relay = new osc.Relay(udp, socketPort, {
+  //   raw: true
+  // });
 });
 
 // based off of standard express generator web server setup
