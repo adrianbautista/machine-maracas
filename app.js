@@ -8,6 +8,8 @@ var app = express();
 const UDP_PORT = 7500;
 const WEB_SOCKET_PORT = 8081;
 
+var currentRate = 1;
+
 var osc = require("osc"),
     WebSocket = require("ws");
 
@@ -66,14 +68,13 @@ wss.on("connection", function(ws) {
   ws.on('message', (wsMsg) => {
     try {
       console.log(wsMsg.toString());
-      udp.sendRaw(wsMsg);          
+      udp.sendRaw(wsMsg);
     } catch(e) {
       console.log("Unexpected message: ");
       console.log(e)
       console.log(e.stack)
     }
   });
-
 
   // var relay = new osc.Relay(udp, socketPort, {
   //   raw: true
@@ -93,7 +94,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res, next) {
-  res.render('index', { address: getIPAddresses()[0], port: WEB_SOCKET_PORT });
+  res.render('index', { address: getIPAddresses()[0], metroRate: currentRate });
 });
 
 // catch 404 and forward to error handler
