@@ -18,7 +18,6 @@ window.addEventListener('load', function() {
   });
 
   port.open();
-  var port = new WebSocket("ws://" + address + ":" + "8081");
 
   metroIncrease.onclick = function(event) {
     event.preventDefault();
