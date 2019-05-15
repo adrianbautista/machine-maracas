@@ -1,5 +1,3 @@
-var path = "/inputs";
-
 window.addEventListener('load', function() {
   var metroIncrease = document.getElementById("cat-button-increase");
   var metroDecrease = document.getElementById("cat-button-decrease");
@@ -21,11 +19,11 @@ window.addEventListener('load', function() {
 
   metroIncrease.onclick = function(event) {
     event.preventDefault();
-    port.send({ address: path, args: [{ type: "f", value: '0.1' }] });
+    port.send({ address: "/increase", args: [{ type: "s", value: 'i' }] });
   };
 
   metroDecrease.onclick = function(event) {
     event.preventDefault();
-    port.send({ address: path, args: [{ type: "f", value: '-0.1' }] });
+    port.send({ address: "/decrease", args: [{ type: "s", value: 'd' }] });
   };
 });
