@@ -9,77 +9,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
   </head>
 
-  <body>
-    <section class="hero is-primary">
+  <body class="has-text-centered">
+    <section class="hero is-dark">
       <div class="hero-body">
         <div class="container">
-          <h1 class="title">
-            ML Maracas
+          <h1 class="title is-4">
+            MASS MEOW METRONOME
           </h1>
           <p class="subtitle is-7">
-            send your mobile device's orientation to an OSC server
+            NYU IDM Sound Studio Spring 2019
           </p>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <form id="configForm">
-          <div class="columns">
-            <div class="column">
-              <div class="field">
-                <label class="label">WebSocket Address</label>
-                <div class="control">
-                  <input class="input" name="address" type="text" value="<%= address %>">
-                </div>
-              </div>
-            </div>
-
-            <div class="column">
-              <div class="field">
-                <label class="label">WebSocket Port</label>
-                <div class="control">
-                  <input class="input" name="port" type="text" value="<%= port %>">
-                </div>
-              </div>
-            </div>
-
-            <div class="column">
-              <div class="field">
-                <label class="label">OSC Path</label>
-                <div class="control">
-                  <input class="input" name="path" type="text" value="/inputs">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="columns">
-            <div class="column">
-              <div class="field">
-                <div class="control">
-                  <input type="submit" class="button is-primary" value="Connect">
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <section class="section">
+    <section class="section" id="main-section" data-address="<%= address %>">
       <div class="container">
         <div class="columns">
           <div class="column">
-            <button id="cat-button-increase">
-              <img src="/images/cat.png" alt="cat increase" />
-            </button>
-
-            <button id="cat-button-decrease">
-              <img src="/images/cat2.png" alt="cat decrease" />
-            </button>
+            <div class="level is-mobile">
+              <div class="level-item">
+                <div>
+                  <p class="heading">Metronome Rate</p>
+                  <p class="title" id="metro-rate"><%= metroRate %></p>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div class="columns">
+          <div class="column is-half">
+            <img id="cat-button-increase" class="button" src="/images/cat.png" alt="cat increase" />
+          </div>
+
+          <div class="column is-half">
+            <img id="cat-button-decrease" class="button" src="/images/cat2.png" alt="cat increase" />
+          </div>
+
         </div>
       </div>
     </section>
